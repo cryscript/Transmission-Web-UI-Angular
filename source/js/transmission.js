@@ -215,24 +215,24 @@ define(function () {
         }
         var time = '';
         if(second >= 24 * 3600 * 365){
-            time += parseInt(second / (24 * 3600 * 365)) + '年';
+            time += parseInt(second / (24 * 3600 * 365)) + ' year ';
             second %= 24 * 3600 * 365;
         }
 
         if (second >= 24 * 3600) {
-            time += parseInt(second / (24 * 3600)) + '天';
+            time += parseInt(second / (24 * 3600)) + ' day ';
             second %= 24 * 3600;
         }
         if (second >= 3600) {
-            time += parseInt(second / 3600) + '小时';
+            time += parseInt(second / 3600) + ' hour ';
             second %= 3600;
         }
         if (second >= 60) {
-            time += parseInt(second / 60) + '分钟';
+            time += parseInt(second / 60) + ' minute ';
             second %= 60;
         }
         if (second > 0) {
-            time += second + '秒';
+            time += second + ' second ';
         }
         return time;
     };

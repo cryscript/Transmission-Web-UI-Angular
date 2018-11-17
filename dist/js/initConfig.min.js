@@ -333,10 +333,10 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
                             $scope.stopAllAjax();
                             $scope.modal.show({
                                 type:"waring",
-                                title:"一分钟内请求Session失败次数过多",
-                                content:"请检查您的网络是否顺畅，或点击刷新尝试解决！",
+                                title:"Request Session failed too many times in one minute",
+                                content:"Please check if your network is smooth, or click Refresh to try and solve!",
                                 btnText:{
-                                    submit:"刷新"
+                                    submit:"Refresh"
                                 },
                                 btnType : 2,
                                 submitFunc : function () {
@@ -374,10 +374,10 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
             }, function(reason) {
                 $scope.modal.show({
                     type:"waring",
-                    title:"查询统计数据失败",
-                    content:"请检查您的网络是否顺畅，或点击重载尝试重新加载一次统计数据！",
+                    title:"Query statistics failed",
+                    content:"Please check if your network is smooth, or click Reload to try to reload the statistics!",
                     btnText:{
-                        submit:"重载"
+                        submit:"Reload"
                     },
                     btnType : 2,
                     submitFunc : function () {
@@ -465,10 +465,10 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
                         $scope.closeAjax($scope.pool.ajax.torrent);
                         $scope.modal.show({
                             type:"waring",
-                            title:"短期内多次查询活动任务失败",
-                            content:"请检查您的网络是否顺畅，或点击重载尝试重新加载一次活动任务数据！",
+                            title:"Multiple query activity tasks failed in the short term",
+                            content:"Please check if your network is smooth, or click Reload to try to reload the active task data!",
                             btnText:{
-                                submit:"重载"
+                                submit:"Reload"
                             },
                             btnType : 2,
                             submitFunc : function () {
@@ -523,10 +523,10 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
             }, function(reason) {
                 $scope.modal.show({
                     type:"waring",
-                    title:"获取传输任务列表数据失败",
-                    content:"请检查您的网络是否顺畅，或点击重载重新加载任务列表一次！",
+                    title:"Failed to get transfer task list data",
+                    content:"Please check if your network is smooth, or click Reload to reload the task list once!",
                     btnText:{
-                        submit:"重载"
+                        submit:"Reload"
                     },
                     btnType : 2,
                     submitFunc : function () {
@@ -616,7 +616,7 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
             return tr.bytesConvert(op);
         };
 
-        //分析已下载数据
+        //分析Downloaded数据
         $scope.parseFloat2 = function(num) {
             return tr.parseFloat2(num);
         };
@@ -657,9 +657,9 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
         $scope.parseEta = function(eta) {
             var str = "";
             if (eta === -1) {
-                str = "不可用";
+                str = "unavailable";
             } else if (eta === -2) {
-                str = "无法预估";
+                str = "Unpredictable";
             } else {
                 str = tr.secondsToTime(eta);
             }
@@ -692,16 +692,16 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
                         if(data.isFinished === true){
                             html += "";
                         }else{
-                            html += "已暂停";
+                            html += "Paused";
                         }
                         if(data.percentDone < 1){
-                            html = "已暂停";
+                            html = "Paused";
                         }else {
                             if (data.seedRatioLimit > data.uploadRatio) {
-                                html = "已暂停做种";
+                                html = "Suspended seeding";
                             }else{
                                 if (data.isFinished === true) {
-                                    html += "已完成做种";
+                                    html += "Completed seeding";
                                 }
                             }
                         }
@@ -712,12 +712,12 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
                         // html += "已暂停";
                         break;
                     case 2:
-                        html += "正在验证本底数据";
-                        html += "<span>(" + (data.recheckProgress < 1 ? tr.parseFloat2(data.recheckProgress * 100) : "100") + "% 已验证)</span>";
+                        html += "Verifying background data";
+                        html += "<span>(" + (data.recheckProgress < 1 ? tr.parseFloat2(data.recheckProgress * 100) : "100") + "% verified)</span>";
                         break;
                     case 4:
-                        html += "<span>下载自</span>";
-                        html += "<span>" + data.peersSendingToUs + "/" + data.peersConnected + "个用户</span>";
+                        html += "<span>Download from</span>";
+                        html += "<span>" + data.peersSendingToUs + "/" + data.peersConnected + "users</span>";
                         html += "<span class=\"icon-download\">";
                         html += $scope.bytesConvert(data.rateDownload) + "/s";
                         html += "</span>";
@@ -726,8 +726,8 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
                         html += "</span>";
                         break;
                     case 6:
-                        html += "<span>做种至</span>";
-                        html += "<span>" + data.peersGettingFromUs + "/" + data.peersConnected + "个用户</span>";
+                        html += "<span>Seeding to</span>";
+                        html += "<span>" + data.peersGettingFromUs + "/" + data.peersConnected + "users</span>";
                         html += "<span class=\"icon-upload\">";
                         html += $scope.bytesConvert(data.rateUpload) + "/s";
                         html += "</span>";
@@ -747,9 +747,9 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
                     case 0:
                         // className = "paused";
                         if (data.metadataPercentComplete < 1) {
-                            html += "<span>磁性链接</span>";
+                            html += "<span>Magnet link</span>";
                             html += "<span>";
-                            html += "下载元数据（" + (data.metadataPercentComplete < 1 ? tr.parseFloat2(data.metadataPercentComplete * 100) : "100") + "%）";
+                            html += "Download metadata (" + (data.metadataPercentComplete < 1 ? tr.parseFloat2(data.metadataPercentComplete * 100) : "100") + "%）";
                             html += "</span>";
                         } else {
                             html += "<span>";
@@ -761,7 +761,7 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
                         }
                         break;
                     case 2:
-                        html += "<span>已下载</span>";
+                        html += "<span>Downloaded</span>";
                         html += "<span>";
                         html += $scope.bytesConvert(data.totalSize * (data.percentDone < 1 ? data.percentDone : 1)) + "/" + $scope.bytesConvert(data.totalSize);
                         html += "</span>";
@@ -770,7 +770,7 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
                         html += "</span>";
                         if (data.uploadedEver > 0) {
                             html += "<span>";
-                            html += "已上传";
+                            html += "Uploaded";
                             html += "</span>";
                             html += "<span>";
                             html += $scope.bytesConvert(data.uploadedEver);
@@ -778,16 +778,16 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
                         }
                         if ($scope.getScreenWidth() > 1024) {
                             html += "<span>";
-                            html += "预估剩余时间：" + $scope.parseEta(data.eta);
+                            html += "Estimated time remaining:" + $scope.parseEta(data.eta);
                             html += "</span>";
                         }
                         break;
                     case 4:
                         // className = "downloading";,
                         if (data.metadataPercentComplete < 1) {
-                            html += "<span>磁性链接</span><span> 下载元数据（" + (data.metadataPercentComplete < 1 ? tr.parseFloat2(data.metadataPercentComplete * 100) : "100") + "%）</span>";
+                            html += "<span>Magnet link</span><span> Download metadata (" + (data.metadataPercentComplete < 1 ? tr.parseFloat2(data.metadataPercentComplete * 100) : "100") + "%）</span>";
                         } else {
-                            html += "<span>已下载</span>";
+                            html += "<span>Downloaded</span>";
                             html += "<span>";
                             html += $scope.bytesConvert(data.totalSize * (data.percentDone < 1 ? data.percentDone : 1)) + "/" + $scope.bytesConvert(data.totalSize);
                             html += "</span>";
@@ -796,7 +796,7 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
                             html += "</span>";
                             if (data.uploadedEver > 0) {
                                 html += "<span>";
-                                html += "已上传";
+                                html += "Uploaded";
                                 html += "</span>";
                                 html += "<span>";
                                 html += $scope.bytesConvert(data.uploadedEver);
@@ -804,24 +804,24 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
                             }
                             if ($scope.getScreenWidth() > 1024) {
                                 html += "<span>";
-                                html += "预估剩余时间：" + $scope.parseEta(data.eta);
+                                html += "Estimated time remaining:" + $scope.parseEta(data.eta);
                                 html += "</span>";
                             }
                         }
                         break;
                     case 6:
                         // className = "seeding";
-                        html += "<span>已上传</span>";
+                        html += "<span>Uploaded</span>";
                         html += "<span>";
                         html += $scope.bytesConvert(data.uploadedEver) + "/" + $scope.bytesConvert(data.totalSize);
                         html += "</span>";
                         html += "<span>";
-                        // html += "分享率(" + tr.parseFloat2(data.uploadRatio) + "%)";
-                        html += "分享率(" + data.uploadRatio.toFixed(2) + ")";
+                        // html += "Sharing rate(" + tr.parseFloat2(data.uploadRatio) + "%)";
+                        html += "Sharing rate(" + data.uploadRatio.toFixed(2) + ")";
                         html += "</span>";
                         if ($scope.getScreenWidth() > 1024) {
                             html += "<span>";
-                            html += "预估剩余时间：" + $scope.parseEta(data.eta);
+                            html += "Estimated time remaining:" + $scope.parseEta(data.eta);
                             html += "</span>";
                         }
                         break;
@@ -994,8 +994,8 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
                 }, function(reason) {
                     $scope.modal.show({
                         type:"waring",
-                        title:"获取明细数据失败",
-                        content:"请检查您的网络是否顺畅！",
+                        title:"Failed to get detailed data",
+                        content:"Please check if your network is ok!",
                         btnType : 1
                     });
                 });
@@ -1036,7 +1036,7 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
                 },function (reason) {
                     $scope.modal.show({
                         type:"waring",
-                        title:"设置文件优先级失败",
+                        title:"Setting file priority failed",
                         content:"test",
                         size:"small",
                         btnType : 1
@@ -1103,16 +1103,16 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
                 var str = "";
                 switch ($scope.detail.torrentData.error){
                     case 0:
-                        str = "无错误";
+                        str = "No error";
                         break;
                     case 1:
-                        str = "Tracker服务器告警";
+                        str = "Tracker server alarm";
                         break;
                     case 2:
-                        str = "Tracker服务器错误";
+                        str = "Tracker server error";
                         break;
                     case 3:
-                        str = "本地错误";
+                        str = "Local error";
                         break;
                     default:
                         str = $scope.detail.torrentData.errorString;
@@ -1192,9 +1192,9 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
             $scope.modal.show({
                 type:"add",
                 size:"big",
-                title:"添加任务",
+                title:"Upload Torrent Files",
                 btnText:{
-                    submit:"添加"
+                    submit:"OK"
                 },
                 tmp:$scope.tmpUrl.addFiles,
                 submitFunc:function () {
@@ -1213,7 +1213,7 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
                         },function (reason) {
                             $scope.modal.show({
                                 type:"waring",
-                                title:"任务添加失败",
+                                title:"Adding task failed",
                                 content:filename,
                                 size:"small",
                                 btnType : 1
@@ -1252,7 +1252,7 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
                                             errFlag = true;
                                             $scope.modal.show({
                                                 type:"waring",
-                                                title:"任务添加失败",
+                                                title:"Adding task failed",
                                                 content:err.join(";"),
                                                 size:"small",
                                                 btnType : 1
@@ -1277,11 +1277,11 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
             // $scope.dataStorage.session
             $scope.modal.show({
                 type:"waring",
-                title:"确定要从传输任务列表中删除"+ (ids.length > 1?"这些":"此") +"任务吗？",
-                content:ids.length > 1?"已选中多个任务":$scope.dataStorage.torrent[$scope.dataStorage.selectedIndex].name,
+                title:"Make sure to remove from the transfer task list"+ (ids.length > 1?"these":"this") +"task？",
+                content:ids.length > 1?"Multiple tasks selected":$scope.dataStorage.torrent[$scope.dataStorage.selectedIndex].name,
                 btnType : 2,
                 btnText:{
-                    submit:"删除"
+                    submit:"Delete"
                 },
                 submitFunc:function () {
                     $scope.modal.close();
@@ -1290,8 +1290,8 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
                     }, function(reason) {
                         $scope.modal.show({
                             type:"waring",
-                            title:"从下载列表中移除任务失败",
-                            content:"请检查您的网络是否顺畅！",
+                            title:"Removing a task from the download list failed",
+                            content:"Please check if your network is ok!",
                             btnType : 1
                         });
                     });
@@ -1308,8 +1308,8 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
             }, function(reason) {
                 $scope.modal.show({
                     type:"waring",
-                    title:"暂停传输任务请求失败！",
-                    content:"请检查您的网络是否顺畅！",
+                    title:"Pausing a transfer task request failed!",
+                    content:"Please check if your network is ok!",
                     btnType : 1
                 });
             });
@@ -1324,8 +1324,8 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
             }, function(reason) {
                 $scope.modal.show({
                     type:"waring",
-                    title:"开始传输任务请求失败！",
-                    content:"请检查您的网络是否顺畅！",
+                    title:"Start transfer task request failed!",
+                    content:"Please check if your network is ok!",
                     btnType : 1
                 });
             });
@@ -1340,8 +1340,8 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
             }, function(reason) {
                 $scope.modal.show({
                     type:"waring",
-                    title:"立即开始传输任务请求失败！",
-                    content:"请检查您的网络是否顺畅！",
+                    title:"Start transmitting task request immediately failed!",
+                    content:"Please check if your network is ok!",
                     size:"small",
                     btnType : 1
                 });
@@ -1356,11 +1356,11 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
             }, function(reason) {
                 $scope.modal.show({
                     type:"waring",
-                    title:"保存设置失败！",
-                    content:"请检查您的网络是否顺畅，或点击重试再尝试一次！",
+                    title:"Save settings failed!",
+                    content:"Please check if your network is ok, or click Try again and try again!",
                     size:"small",
                     btnText:{
-                        submit:"重试"
+                        submit:"Retry"
                     },
                     btnType : 2,
                     submitFunc:function () {
@@ -1385,14 +1385,14 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
             "isNeedTitle":false,
             "type":"add",//tip,waring,delete,add,window
             "size":"small",
-            "title":"添加传输任务失败",
-            "content":"请检查你的网络，或者尝试重新添加一次！",
+            "title":"Add transfer task failed",
+            "content":"Please check your network or try adding it again!",
             "btnType":2,//0 只有确定按钮，1 只有取消按钮，2 两个都有
             "tempatesUrl":"template/modals.html",
             "tmp":"",
             "btnText":{
-                "submit":"确定",
-                "cancel":"关闭"
+                "submit":"OK",
+                "cancel":"Cancel"
             },
             "submitFunc":function () {
                 $scope.modal.close();
@@ -1408,12 +1408,12 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
 
                 if(!op.btnText){
                     op.btnText = {
-                        submit:"确定",
-                        cancel:"关闭"
+                        submit:"OK",
+                        cancel:"Cancel"
                     };
                 }else{
-                    op.btnText.submit = (op.btnText.submit === "" || !op.btnText.submit)?"确定":op.btnText.submit;
-                    op.btnText.cancel = (op.btnText.cancel === "" || !op.btnText.cancel)?"关闭":op.btnText.cancel;
+                    op.btnText.submit = (op.btnText.submit === "" || !op.btnText.submit)?"OK":op.btnText.submit;
+                    op.btnText.cancel = (op.btnText.cancel === "" || !op.btnText.cancel)?"Cancel":op.btnText.cancel;
                 }
 
                 $scope.modal.tmp = op.tmp !== undefined?op.tmp:$scope.tmpUrl.modal;
@@ -1455,7 +1455,7 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
         };
 
         $scope.tag = {
-            "name":["种子","速度","用户","网络"],
+            "name":["Torrent", "Speed", "Peers", "Network"],
             "index":0,
             "swipLeft":function () {
                 if($scope.tag.index < 3){
@@ -1477,7 +1477,7 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
         $scope.nav = {
             status:false,
             menudata:{
-                name:["设置","计划任务运行","收缩视图","查看传输明细","统计","关于"],
+                name:["Settings", "Scheduled Task Run", "List View", "View Transfer Details", "Statistics", "About"],
                 className:["icon-settings","icon-scheduled","icon-listview","icon-info-black","icon-data_usage","icon-goat"]
             },
             toggle:function () {
@@ -1505,8 +1505,8 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
                         },function (reason) {
                             $scope.modal.show({
                                 type:"waring",
-                                title:"端口是否开启检测失败",
-                                content:"请检查您的网络是否顺畅！",
+                                title:"Whether the port is enabled to detect failure",
+                                content:"Please check if your network is ok!",
                                 btnType : 1
                             });
                         });
@@ -1516,7 +1516,7 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
                             tmp:$scope.tmpUrl.settings,
                             btnType : 2,
                             btnText:{
-                                submit:"保存"
+                                submit:"OK"
                             },
                             submitFunc : function () {
                                 var param = {};
@@ -1538,8 +1538,8 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
                         }, function(reason) {
                             $scope.modal.show({
                                 type:"waring",
-                                title:(params["alt-speed-enabled"] === true?"打开":"关闭") + "计划任务失败！",
-                                content:"请检查您的网络是否顺畅，或点击确定再此尝试保存！",
+                                title:(params["alt-speed-enabled"] === true?"turn on":"shut down") + "The scheduled task failed!",
+                                content:"Please check if your network is smooth, or click OK and try saving again!",
                                 btnType : 1
                             });
                         });
@@ -1692,21 +1692,21 @@ define(["jquery", "lodash", "transmission", "angularAMD", "mnTouch"], function($
                     return start;
                 })(),
                 "speed-limit-day":[
-                    {"key":"每天","value":127},
-                    {"key":"工作日","value":62},
-                    {"key":"周末","value":65},
-                    {"key":"星期天","value":1},
-                    {"key":"星期一","value":2},
-                    {"key":"星期二","value":4},
-                    {"key":"星期三","value":8},
-                    {"key":"星期四","value":16},
-                    {"key":"星期五","value":32},
-                    {"key":"星期六","value":64}
+                    {"key":"Everyday","value":127},
+                    {"key":"Weekdays","value":62},
+                    {"key":"Weekends","value":65},
+                    {"key":"Synday","value":1},
+                    {"key":"Monday","value":2},
+                    {"key":"Tuesday","value":4},
+                    {"key":"Wednesday","value":8},
+                    {"key":"Thursday","value":16},
+                    {"key":"Friday","value":32},
+                    {"key":"Saturday","value":64}
                 ],
                 "encryption":[
-                    {"key":"允许加密","value":"tolerated"},
-                    {"key":"喜欢加密","value":"preferred"},
-                    {"key":"需要加密","value":"required"}
+                    {"key":"Allow encryption","value":"tolerated"},
+                    {"key":"Prefer encryption","value":"preferred"},
+                    {"key":"Require encryption","value":"required"}
                 ],
                 "addTransform":{
                     "metainfo":[],

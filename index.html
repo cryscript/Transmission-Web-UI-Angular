@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Transmission Angular</title>
+    <title>Transmission Web Interface</title>
     <meta http-equiv="Cache-control" content="public">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="mobile-web-app-capable" content="yes">
@@ -24,7 +24,7 @@
             <div class="cssload-cube cssload-c4"></div>
             <div class="cssload-cube cssload-c3"></div>
         </div>
-        <span>正在初始化</span>
+        <span>Loading</span>
     </div>
 </div>
 <header class="header mobile" ng-class="{'mobile-show':consolePanel.status}">
@@ -34,22 +34,22 @@
             <i>Transmission</i>
         </span>
         <span class="icon-add" ng-class="{'disabled':allLoaded === false}" ng-click="addTransform($event)">
-            <i>添加任务</i>
+            <i>Add task</i>
         </span>
         <span class="icon-delete" ng-class="{'disabled':dataStorage.selectedIndex === '' || allLoaded === false}" ng-click="removeFromList([dataStorage.torrent[dataStorage.selectedIndex].id])">
-            <i>从列表中删除</i>
+            <i>Remove from list</i>
         </span>
         <span class="icon-start-light" ng-class="{'disabled':dataStorage.selectedIndex === '' || allLoaded === false}" ng-click="startTransform([dataStorage.torrent[dataStorage.selectedIndex].id])">
-            <i>开始</i>
+            <i>Start</i>
         </span>
             <span class="icon-pause-light" ng-class="{'disabled':dataStorage.selectedIndex === '' || allLoaded === false}" ng-click="pauseTransform([dataStorage.torrent[dataStorage.selectedIndex].id])">
-            <i>暂停</i>
+            <i>Pause</i>
         </span>
         <span class="icon-start-all-light" ng-class="{'disabled':dataStorage.torrent.length === 0 || allLoaded === false}" ng-click="startTransform(dataStorage.allIds)">
-            <i>开始所有任务</i>
+            <i>Start all</i>
         </span>
         <span class="icon-pause-all-light" ng-class="{'disabled':dataStorage.torrent.length === 0 || allLoaded === false}" ng-click="pauseTransform(dataStorage.allIds)">
-            <i>暂停所有任务</i>
+            <i>Stop all</i>
         </span>
     </div>
 </header>

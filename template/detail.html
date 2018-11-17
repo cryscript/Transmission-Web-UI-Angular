@@ -3,50 +3,50 @@
         <span ng-if="detail.status" title="{{detail.torrentData.name}}">{{detail.torrentData.name}}</span>
     </h2>
     <div class="deail-contents" ng-show="detail.selectedTabIndex === 0">
-        <h3>活跃状态</h3>
+        <h3>Active</h3>
         <h4 ng-if="echartsLoaded === true">
             <span ng-class="{'total':detail.chartMaxMode === true}" ng-click="detail.toggleChartMaxMode()"><b>稳定度</b>/<i>上限占比</i></span>
-            <i class="chart-legend-download">下载速度</i>
-            <i class="chart-legend-upload">上传速度</i>
+            <i class="chart-legend-download">Download speed</i>
+            <i class="chart-legend-upload">Upload speed</i>
         </h4>
         <div id="download-speed-chart" class="download-speed-chart" ng-if="echartsLoaded === true"></div>
         <div class="table" ng-if="detail.status">
             <table>
                 <tbody>
                 <tr>
-                    <th>下载进度</th>
+                    <th>Download progress</th>
                     <td>
                         <span>{{bytesConvert(detail.torrentData.totalSize * (detail.torrentData.percentDone < 1 ? detail.torrentData.percentDone : 1)) + "/" + bytesConvert(detail.torrentData.totalSize) }}</span>
                         <span>{{"(" + (detail.torrentData.percentDone < 1 ? parseFloat2(detail.torrentData.percentDone * 100) : "100") + "%)"}}</span>
-                        <span ng-if="dataStorage.detail.haveUnchecked > 0">未验证：{{bytesConvert(dataStorage.detail.haveUnchecked)}}</span>
+                        <span ng-if="dataStorage.detail.haveUnchecked > 0">unverified：{{bytesConvert(dataStorage.detail.haveUnchecked)}}</span>
                     </td>
                 </tr>
                 <tr>
-                    <th>已上传</th>
+                    <th>Uploaded</th>
                     <td>{{bytesConvert(detail.torrentData.uploadedEver)}}</td>
                 </tr>
                 <tr>
-                    <th>已下载</th>
+                    <th>Downloaded</th>
                     <td>{{bytesConvert(detail.torrentData.totalSize * (detail.torrentData.percentDone < 1 ? detail.torrentData.percentDone : 1))}}</td>
                 </tr>
                 <tr>
-                    <th>状态</th>
+                    <th>State</th>
                     <td>{{getStatusText({"status":detail.torrentData.status,"metaComplete":detail.torrentData.metadataPercentComplete})}}</td>
                 </tr>
                 <tr>
-                    <th>运行时长</th>
+                    <th>Running time</th>
                     <td>{{howLong(detail.torrentData.addedDate)}}</td>
                 </tr>
                 <tr>
-                    <th>预计还需时长</th>
+                    <th>Remaining time</th>
                     <td>{{parseEta(detail.torrentData.eta)}}</td>
                 </tr>
                 <tr>
-                    <th>上一次活跃</th>
+                    <th>Last activity</th>
                     <td>{{dataStorage.detail.activityDate === 0?"暂无":getFullDate(dataStorage.detail.activityDate * 1000)}}</td>
                 </tr>
                 <tr>
-                    <th>错误</th>
+                    <th>Error</th>
                     <td>
                         <span>{{detail.parseErrorText()}}</span>
                     </td>
@@ -54,38 +54,38 @@
                 </tbody>
             </table>
         </div>
-        <h3>明细</h3>
+        <h3>Details</h3>
         <div class="table mobile" ng-if="detail.status">
             <table>
                 <tbody>
                 <tr>
-                    <th>大小</th>
+                    <th>Size</th>
                     <td>
                         <span>{{bytesConvert(detail.torrentData.totalSize)}}</span>
                         <span>({{dataStorage.detail.activityDate.pieceCount + "pieces @" + bytesConvert(dataStorage.detail.pieceSize)}})</span>
                     </td>
                 </tr>
                 <tr>
-                    <th>位置</th>
+                    <th>Location</th>
                     <td>{{detail.torrentData.downloadDir}}</td>
                 </tr>
                 <tr>
-                    <th>哈希</th>
+                    <th>Hash</th>
                     <td>{{dataStorage.detail.hashString}}</td>
                 </tr>
                 <tr>
-                    <th>私有</th>
-                    <td>{{dataStorage.detail.isPrivate === true ? "私有种子":"公开种子"}}</td>
+                    <th>Privacy</th>
+                    <td>{{dataStorage.detail.isPrivate === true ? "Private torrent":"Public torrent"}}</td>
                 </tr>
                 <tr>
-                    <th>源</th>
+                    <th>Origin</th>
                     <td>
                         <spaan>创建者 {{dataStorage.detail.creator}}</spaan>
                         <span>于 {{getFullDate(dataStorage.detail.dateCreated * 1000)}} 创建</span>
                     </td>
                 </tr>
                 <tr>
-                    <th>备注</th>
+                    <th>Comment</th>
                     <td>{{dataStorage.detail.comment}}</td>
                 </tr>
                 </tbody>
@@ -140,7 +140,7 @@
                     <div class="trigger" id="file-list-trigger-container">
                         <span class="icon-expand_more" ng-class="{'selected':detail.allPriorityStatus === -1}" ng-click="detail.changePriority({'index':-1,'type':-1})"></span><span class="icon-drag_handle" ng-class="{'selected':detail.allPriorityStatus === 0}" ng-click="detail.changePriority({'index':-1,'type':0})"></span><span class="icon-expand_less" ng-class="{'selected':detail.allPriorityStatus === 1}" ng-click="detail.changePriority({'index':-1,'type':1})"></span>
                     </div>
-                    全部
+                    All
                 </div>
             </li>
             <li ng-repeat="item in dataStorage.detail.files track by $index">
@@ -157,43 +157,43 @@
 </script>
 <script type="text/html" id="blankDetail">
     <h2>
-        请选择一个任务
+        Please select a task
     </h2>
     <div class="deail-contents" ng-show="detail.selectedTabIndex === 0">
-        <h3>活跃状态</h3>
+        <h3>Active state</h3>
         <div class="table">
             <table>
                 <tbody>
                 <tr>
-                    <th>下载进度</th>
+                    <th>Download progress</th>
                     <td> / </td>
                 </tr>
                 <tr>
-                    <th>已上传</th>
+                    <th>Uploaded</th>
                     <td> / </td>
                 </tr>
                 <tr>
-                    <th>已下载</th>
+                    <th>Downloaded</th>
                     <td> / </td>
                 </tr>
                 <tr>
-                    <th>状态</th>
+                    <th>Status</th>
                     <td> / </td>
                 </tr>
                 <tr>
-                    <th>运行时长</th>
+                    <th>Running time</th>
                     <td> / </td>
                 </tr>
                 <tr>
-                    <th>预计还需时长</th>
+                    <th>Remaining time</th>
                     <td> / </td>
                 </tr>
                 <tr>
-                    <th>上一次活跃</th>
+                    <th>Last active</th>
                     <td> / </td>
                 </tr>
                 <tr>
-                    <th>错误</th>
+                    <th>Error</th>
                     <td> / </td>
                 </tr>
                 </tbody>
